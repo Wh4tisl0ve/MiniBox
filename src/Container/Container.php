@@ -49,14 +49,13 @@ class Container implements ContainerInterface
      */
     public function compile(string $filename): void
     {
-        try {
-            $services = require $filename;
-
-            foreach ($services as $name => $callable) {
-                $this->register($name, $callable);
-            }
-        } catch (\Error) {
+        if (!file_exists($filename))
             throw new FailReadServicesConfigException("Не найден конфигурационный файл " . $filename);
+
+        $services = require $filename;
+
+        foreach ($services as $name => $callable) {
+            $this->register($name, $callable);
         }
     }
 

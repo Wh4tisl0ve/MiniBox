@@ -18,7 +18,6 @@ class Application extends Container
     {
         $this->compile($configServicesPath);
         $this->registerDepends();
-        $this->router = $this->get(AbstractRouter::class);
         $this->router->build();
     }
 
