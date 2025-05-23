@@ -10,8 +10,6 @@ use MiniBox\Http\Response\HttpResponse;
 use MiniBox\Router\HttpRouter;
 use ReflectionMethod;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 class Application extends Container
 {
     private AbstractRouter $router;
