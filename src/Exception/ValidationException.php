@@ -2,4 +2,4 @@
 
 namespace MiniBox\Exception;
 
-class ValidationException extends \Exception{}
+class ValidationException extends InvalidDataException{}
