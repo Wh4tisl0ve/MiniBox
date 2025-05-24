@@ -15,7 +15,7 @@ class HttpRouter extends AbstractRouter
         if (!file_exists($filename))
             throw new RoutesFileNotFound;
 
-        $routes = require $this->configPath . "/$filename";
+        $routes = require $filename;
 
         foreach ($routes as $method => $route) {
             foreach ($route as $path => $handler) {

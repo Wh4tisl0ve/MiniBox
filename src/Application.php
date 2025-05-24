@@ -14,16 +14,18 @@ class Application extends Container
 {
     private AbstractRouter $router;
 
-    public function __construct(?string $configServicesPath = '../config/services.php')
+    public function __construct(
+        ?string $configServicesPath = '../config/services.php',
+        ?string $configRoutesPath = '../config/routes.php')
     {
         $this->compile($configServicesPath);
         $this->registerDepends();
-        $this->router->build();
+        $this->router->build($configRoutesPath);
     }
 
     private function registerDepends(): void
     {
-        $this->router = new HttpRouter(__DIR__);
+        $this->router = new HttpRouter();
     }
 
     public function handle(HttpRequest $httpRequest): HttpResponse
