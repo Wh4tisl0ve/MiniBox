@@ -5,7 +5,7 @@ namespace MiniBox;
 use MiniBox\ArgumentsResolver\ArgumentsResolver;
 use MiniBox\Container\Container;
 use MiniBox\Contract\AbstractRouter;
-use MiniBox\Http\HttpRequest;
+use MiniBox\Http\HttpParser;
 use MiniBox\Http\Response\HttpResponse;
 use MiniBox\Router\HttpRouter;
 use ReflectionMethod;
@@ -28,8 +28,10 @@ class Application extends Container
         $this->router = new HttpRouter();
     }
 
-    public function handle(HttpRequest $httpRequest): HttpResponse
+    public function handle(): HttpResponse
     {
+        $httpRequest = HttpParser::parse($_SERVER);
+
         $route = $this->router->get($httpRequest->getUri(), $httpRequest->getMethod());
 
         [$controllerClass, $methodName] = $route['handler'];
